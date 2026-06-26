@@ -110,6 +110,29 @@
       margin-top: 24px;
     }
 
+    label {
+      display: block;
+      margin-top: 24px;
+      color: var(--ink);
+      font: 700 15px/1.45 ui-monospace, "SFMono-Regular", Consolas, monospace;
+    }
+
+    input {
+      width: min(100%, 460px);
+      min-height: 46px;
+      margin-top: 8px;
+      border: 2px solid var(--ink);
+      background: var(--panel);
+      color: var(--ink);
+      padding: 10px 12px;
+      font: 16px/1.2 ui-monospace, "SFMono-Regular", Consolas, monospace;
+    }
+
+    input:focus {
+      outline: 3px solid rgba(15, 118, 110, 0.28);
+      outline-offset: 2px;
+    }
+
     a.button {
       display: inline-flex;
       min-height: 46px;
@@ -197,6 +220,8 @@
           <li>Demo rows and commercial rows are deduplicated against the existing portfolio.</li>
           <li>Commercial files live in a private Hugging Face repo after generation.</li>
         </ul>
+        <label for="hf-username">Hugging Face username for private repo access</label>
+        <input id="hf-username" name="hf_username" autocomplete="username" placeholder="your-huggingface-username">
         <div class="actions">
           <a class="button" id="checkout" href="#" rel="noopener">Buy with Lemon Squeezy</a>
           <a class="button secondary" id="inquiry" href="#" rel="noopener">Request Custom Dataset</a>
@@ -239,8 +264,29 @@
     document.getElementById("commercial-repo").textContent = commercialRepo || "Not provided";
 
     const checkout = document.getElementById("checkout");
+    const hfUsername = document.getElementById("hf-username");
+    const withHuggingFaceUsername = (url) => {
+      const parsed = new URL(url, window.location.href);
+      const username = hfUsername.value.trim();
+      if (username) {
+        parsed.searchParams.set("checkout[custom][hf_username]", username);
+      }
+      return parsed.toString();
+    };
+
     if (checkoutUrl) {
       checkout.href = checkoutUrl;
+      checkout.addEventListener("click", (event) => {
+        const username = hfUsername.value.trim();
+        if (!username) {
+          event.preventDefault();
+          hfUsername.focus();
+          hfUsername.setAttribute("aria-invalid", "true");
+          return;
+        }
+        hfUsername.removeAttribute("aria-invalid");
+        checkout.href = withHuggingFaceUsername(checkoutUrl);
+      });
     } else {
       checkout.href = "https://discord.com/app";
       checkout.textContent = "Contact on Discord";
