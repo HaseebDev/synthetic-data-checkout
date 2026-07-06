@@ -52,12 +52,12 @@
 
         <div class="button-row">
           <a class="button" id="checkout" href="#" rel="noopener">Buy with Lemon Squeezy</a>
-          <a class="button secondary" id="inquiry" href="#" rel="noopener">Request Custom Dataset</a>
+          <a class="button secondary" id="support" href="https://discord.com/app" rel="noopener">Support on Discord</a>
         </div>
 
         <p class="alert" id="fallback">
-          If checkout is not available for this dataset yet, add xomohappy on Discord and include
-          the dataset name shown on this page.
+          If checkout is not available for this premade dataset yet, add xomohappy on Discord
+          for access support and include the dataset name shown on this page.
         </p>
       </section>
 
@@ -87,7 +87,6 @@
     const demoRepo = params.get("demo_repo") || "";
     const commercialRepo = params.get("commercial_repo") || "";
     const checkoutUrl = params.get("checkout_url") || "";
-    const inquiryUrl = params.get("inquiry_url") || "";
 
     const readable = niche
       ? niche.replace(/[_-]+/g, " ").replace(/\b\w/g, char => char.toUpperCase())
@@ -125,14 +124,6 @@
     } else {
       checkout.href = "https://discord.com/app";
       checkout.textContent = "Contact on Discord";
-    }
-
-    const inquiry = document.getElementById("inquiry");
-    if (inquiryUrl) {
-      inquiry.href = inquiryUrl;
-    } else {
-      inquiry.href = "https://discord.com/app";
-      inquiry.textContent = "Request on Discord";
     }
   </script>
 </body>
