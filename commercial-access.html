@@ -13,7 +13,7 @@
       <div class="brand">HaseebDev Synthetic Data</div>
       <div class="nav">
         <a href="index.html">Product</a>
-        <a href="commercial-access.html">Checkout Access</a>
+        <a href="https://huggingface.co/HaseebDev" rel="noopener">Demo Datasets</a>
         <a href="terms.html">Terms</a>
         <a href="privacy.html">Privacy</a>
         <a href="refund.html">Refunds</a>
@@ -56,8 +56,7 @@
         </div>
 
         <p class="alert" id="fallback">
-          If checkout is not available for this premade dataset yet, add xomohappy on Discord
-          for access support and include the dataset name shown on this page.
+          This page is dataset-specific. Open it from a public demo dataset card so the selected demo repo, private commercial repo, and checkout metadata are attached before purchase.
         </p>
       </section>
 
@@ -108,7 +107,9 @@
       return parsed.toString();
     };
 
-    if (checkoutUrl) {
+    const hasDatasetContext = Boolean(niche && demoRepo && commercialRepo && checkoutUrl);
+
+    if (hasDatasetContext) {
       checkout.href = checkoutUrl;
       checkout.addEventListener("click", (event) => {
         const username = hfUsername.value.trim();
@@ -122,8 +123,12 @@
         checkout.href = withHuggingFaceUsername(checkoutUrl);
       });
     } else {
-      checkout.href = "https://discord.com/app";
-      checkout.textContent = "Contact on Discord";
+      document.getElementById("title").textContent = "Select a demo dataset first";
+      checkout.href = "https://huggingface.co/HaseebDev";
+      checkout.textContent = "Browse demo datasets";
+      hfUsername.disabled = true;
+      hfUsername.placeholder = "Open this page from a demo dataset card";
+      document.getElementById("fallback").textContent = "This access page only becomes a checkout page when opened from a public demo dataset card. That card supplies the selected dataset, demo repo, commercial repo, and Lemon Squeezy checkout metadata.";
     }
   </script>
 </body>
