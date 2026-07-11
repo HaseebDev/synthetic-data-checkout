@@ -107,7 +107,25 @@
       return parsed.toString();
     };
 
-    const hasDatasetContext = Boolean(niche && demoRepo && commercialRepo && checkoutUrl);
+    const isAllowedCheckoutUrl = (url) => {
+      try {
+        const parsed = new URL(url);
+        return (
+          parsed.protocol === "https:" &&
+          parsed.hostname === "syntheticdatasetlab.lemonsqueezy.com" &&
+          parsed.pathname.startsWith("/checkout/buy/")
+        );
+      } catch {
+        return false;
+      }
+    };
+
+    const hasDatasetContext = Boolean(
+      niche &&
+      demoRepo === `HaseebDev/${niche}` &&
+      commercialRepo === `${demoRepo}-commercial` &&
+      isAllowedCheckoutUrl(checkoutUrl)
+    );
 
     if (hasDatasetContext) {
       checkout.href = checkoutUrl;
