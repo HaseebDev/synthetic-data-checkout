@@ -83,12 +83,15 @@
     </footer>
   </main>
 
+  <script src="campaign-links.js"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
     const niche = params.get("niche") || params.get("dataset") || "";
     const demoRepo = params.get("demo_repo") || "";
     const commercialRepo = params.get("commercial_repo") || "";
-    const checkoutUrl = params.get("checkout_url") || "";
+    const configuredCheckout = params.get("checkout_url") || "";
+    const checkoutUrl = typeof window.datasetCampaignUrl === "function"
+      ? window.datasetCampaignUrl(configuredCheckout) : configuredCheckout;
     const commercialCount = params.get("commercial_records") || "";
     if (/^[1-9][0-9]{0,6}$/.test(commercialCount)) {
       document.getElementById("commercial-count").textContent = `${Number(commercialCount).toLocaleString("en-US")} (as stated on the dataset card)`;

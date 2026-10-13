@@ -163,6 +163,41 @@ ul {
   align-items: stretch;
 }
 
+.readable {
+  max-width: 900px;
+}
+
+.readable h1 {
+  font-size: clamp(36px, 6vw, 64px);
+  line-height: 1.05;
+}
+
+pre {
+  overflow: auto;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 18px;
+  font: 14px/1.6 ui-monospace, Consolas, monospace;
+  max-width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font: 16px/1.6 Georgia, serif;
+}
+
+td, th {
+  padding: 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
 .panel {
   border-top: 2px solid var(--ink);
   padding-top: 20px;
