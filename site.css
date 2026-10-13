@@ -144,6 +144,25 @@ ul {
   align-items: start;
 }
 
+.catalog {
+  margin-top: 32px;
+  scroll-margin-top: 20px;
+}
+
+.package-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.package-grid .fact-box {
+  min-width: 0;
+}
+
+.package-grid .button-row {
+  align-items: stretch;
+}
+
 .panel {
   border-top: 2px solid var(--ink);
   padding-top: 20px;
@@ -238,7 +257,8 @@ dd {
 
   .hero,
   .two-col,
-  .grid {
+  .grid,
+  .package-grid {
     grid-template-columns: 1fr;
   }
 
