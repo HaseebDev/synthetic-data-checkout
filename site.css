@@ -284,6 +284,39 @@ dd {
   font: 14px/1.5 ui-monospace, "SFMono-Regular", Consolas, monospace;
 }
 
+.analytics-consent {
+  position: fixed;
+  z-index: 40;
+  bottom: 12px;
+  left: 12px;
+  width: min(720px, calc(100% - 24px));
+  border: 2px solid var(--ink);
+  background: var(--panel);
+  padding: 16px;
+  box-shadow: 0 4px 24px #0002;
+}
+
+.analytics-consent p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.analytics-consent .button-row {
+  margin-top: 12px;
+  align-items: center;
+}
+
+.analytics-settings {
+  display: block;
+  border: 0;
+  background: transparent;
+  padding: 12px 0 0;
+  color: var(--accent-dark);
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+}
+
 @media (max-width: 820px) {
   .wrap {
     width: min(100% - 24px, 1120px);
